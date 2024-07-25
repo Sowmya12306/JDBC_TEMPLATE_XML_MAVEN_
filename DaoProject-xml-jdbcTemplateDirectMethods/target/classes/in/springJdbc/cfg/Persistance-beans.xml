@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		https://www.springframework.org/schema/beans/spring-beans.xsd">
+		<bean id="hikariDs" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="password" value="root"></property>
+		<property name="username" value="root"></property>
+		<property name="jdbcUrl" value="jdbc:mysql:///enterprisejava"></property>
+		<property name="minimumIdle" value="10"/>
+		<property name="maximumPoolSize" value="30"/>
+		</bean>
+		
+		<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="hikariDs"/>
+		</bean>
+		
+		<bean id="empDao" class="in.springJdbc.dao.EmployeeDaoImpl">
+		<constructor-arg ref="template"></constructor-arg>
+		</bean>
+</beans>
